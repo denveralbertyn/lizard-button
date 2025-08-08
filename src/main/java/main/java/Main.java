@@ -20,28 +20,37 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        Button button = getButton();
+        StackPane root = new StackPane();
+        Scene scene = getScene(root);
+        root.getChildren().add(button);
+        setStage(stage, scene);
+    }
+
+    private Button getButton() {
         Image image = new Image("/img/liz_icon.png");
         ImageView imageView = new ImageView(image);
         Button button = new Button("", imageView);
         Media audioFile = new Media(getClass().getResource("/audio/audio.mp3").toExternalForm());
-
-
-
-
+        button.setId("btn");
 
         button.setOnAction(actionEvent -> {
             MediaPlayer mediaPlayer = new MediaPlayer(audioFile);
             mediaPlayer.play();
             mediaPlayer.setOnEndOfMedia(mediaPlayer::dispose);
         });
+        return button;
+    }
 
-        StackPane root = new StackPane();
+    private Scene getScene(StackPane root) {
         Scene scene = new Scene(root, 800, 600);
-        root.getChildren().add(button);
+        scene.getStylesheets().add(getClass().getResource("/assets/style.css").toExternalForm());
+        return scene;
+    }
 
+    private static void setStage(Stage stage, Scene scene) {
         stage.setScene(scene);
         stage.setTitle("LIZARD");
         stage.show();
-
     }
 }
