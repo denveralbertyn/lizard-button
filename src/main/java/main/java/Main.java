@@ -28,7 +28,7 @@ public class Main extends Application {
     }
 
     private Button getButton() {
-        Image image = new Image("/img/liz_icon.png");
+        Image image = new Image(getClass().getResource("/img/liz_icon.png").toExternalForm());
         ImageView imageView = new ImageView(image);
         Button button = new Button("", imageView);
         Media audioFile = new Media(getClass().getResource("/audio/audio.mp3").toExternalForm());
